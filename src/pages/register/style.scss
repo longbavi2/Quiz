@@ -1,0 +1,23 @@
+.form{
+    &__register{
+        text-align: center;
+        background-color: #ddd;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 0 auto;
+    }
+    &__group{
+        margin-bottom: 20px;
+        input{
+            width: 40%;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+        }
+    }
+}
+.button__register{
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+}

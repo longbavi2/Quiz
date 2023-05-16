@@ -1,0 +1,32 @@
+.answer{
+    &__select{
+        color: red;
+        &--{
+            color: green; 
+        }
+    }
+    &__true{
+        color: green;
+        font-weight: 500;
+    }
+} 
+.question{
+    &__true{
+        color: white;
+        background-color: red;
+        font-style: italic;
+        margin-left: 10px;
+        padding: 5px;
+        font-size: 10px;
+        border-radius: 6px;
+    }
+    &__false{
+        color: white;
+        background-color: black;
+        font-style: italic;
+        margin-left: 10px;
+        padding: 5px;
+        font-size: 10px;
+        border-radius: 6px;
+    }
+}

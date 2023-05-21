@@ -5,11 +5,19 @@ import { getCookie } from "../../helpers";
 import { dataAnswersService } from "../../components/services/dataAnswersService";
 import { getDataTopic } from "../../components/services/getTopicService";
 import { Link } from "react-router-dom";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import "./style.scss"
 function Answers() {
     const id = getCookie("id")
     const [dataAnswer, setDataAnswer] = useState([]);
+    const [check, setCheck] = useState(false);
     useEffect(() => {
+        const check = (length) => {
+            if (length.length > 0) {
+                setCheck(true)
+            }
+        }
         const dataAnswers = async () => {
             const dataAnswers = await dataAnswersService(id)
             const dataTopic = await getDataTopic();
@@ -21,47 +29,50 @@ function Answers() {
                     id: dataAnswers[i].id
                 })
             }
-            setDataAnswer(options)
+            check(options)
+            setDataAnswer(options);
         }
         dataAnswers();
     }, [])
     return (
         <>
             {
-                dataAnswer.length > 0 ? (<>
-                <table className="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {dataAnswer.map((item, index) => (
-                                <tr key={index}>
-                                    <td>
-                                        {item.id}
-                                    </td>
-                                    <td>
-                                        {item.name}
-                                    </td>
-                                    <td>
-                                        <Link to={`/result/${item.id}`}>
-                                            <button>
-                                                    Xem chi tiết
-                                            </button>
-                                        </Link>
-                                    </td>
+                dataAnswer.length > 0 ? (
+                    <>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </>):(<>
-                 <p>
-                 Hãy đăng nhập để làm bài kiểm tra
-                 </p>
-                </>)
+                            </thead>
+                            <tbody>
+                                {dataAnswer.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>
+                                            {item.id}
+                                        </td>
+                                        <td>
+                                            {item.name}
+                                        </td>
+                                        <td>
+                                            <Link to={`/result/${item.id}`}>
+                                                <button>
+                                                    Xem chi tiết
+                                                </button>
+                                            </Link>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </>
+                ) : (
+                    <>
+                        
+                    </>
+                )
             }
         </>
     )

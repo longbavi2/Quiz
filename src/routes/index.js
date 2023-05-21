@@ -44,6 +44,10 @@ const routes = [
                 element: <Register />
             },
             {
+                path: "*",
+                element: <Login />
+            },
+            {
                 element: <PrivateDefault />,
                 children: [
                     {

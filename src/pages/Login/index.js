@@ -30,7 +30,7 @@ function Login() {
                     Đăng nhập
                 </h2>
                 <div>
-                    <input className="form__email" type="text" placeholder="Email" />
+                    <input className="form__email" type="email" placeholder="email" />
                 </div>
                 <div>
                     <input className="form__password" type="password" placeholder="Password" />

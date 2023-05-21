@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getAnswersById, getTopics } from "../../components/services/getAnswersById";
 import { getDataQuestionById } from "../../components/services/getQuestionService";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 import "./style.scss"
 function Result() {
     const { id } = useParams();
@@ -25,13 +27,13 @@ function Result() {
                 })
             }
             for (var j = 0; j < options.length; j++) {
-                if(options[j].answer === options[j].correctAnswer){
+                if (options[j].answer === options[j].correctAnswer) {
                     count++;
                 }
             }
             const info = {
-                count :count,
-                length :options.length,
+                count: count,
+                length: options.length,
 
             };
             setDataInfo(info)
@@ -46,11 +48,11 @@ function Result() {
                     Danh sách câu hỏi {data[0].name}
                 </h2>
                 <div>
-            <span>Đúng: <strong>{dataInfo.count}</strong></span>
-            <span> | Sai: <strong>{dataInfo.length-dataInfo.count}</strong></span>
-            <span> | Tổng số câu: <strong>{dataInfo.length}</strong></span>
-            <span> | Tỷ lệ đúng: <strong>{Math.floor(dataInfo.count/dataInfo.length*100)}%</strong></span>
-          </div>
+                    <span>Đúng: <strong>{dataInfo.count}</strong></span>
+                    <span> | Sai: <strong>{dataInfo.length - dataInfo.count}</strong></span>
+                    <span> | Tổng số câu: <strong>{dataInfo.length}</strong></span>
+                    <span> | Tỷ lệ đúng: <strong>{Math.floor(dataInfo.count / dataInfo.length * 100)}%</strong></span>
+                </div>
                 <form action="" >
                     {
                         data.map((item, index) => (
@@ -100,7 +102,13 @@ function Result() {
                         <button type="submit" >Làm lại</button>
                     </Link>
                 </form>
-            </>) : (<></>)}
+            </>) : (<>
+                {[...Array(8)].map((item, index) => (
+                    <div key={index} className="item">
+                        <Skeleton width="100%" height="50px" />
+                    </div>
+                ))}
+            </>)}
         </>
     )
 }

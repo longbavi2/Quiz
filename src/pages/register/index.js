@@ -42,7 +42,7 @@ function Register() {
                     <input placeholder="Nhập họ tên" className="form__register__fullnam" name="fullname" type="text" required />
                 </div>
                 <div className="form__group">
-                    <input placeholder="Nhập email" className="form__register__email" name="email" type="text" required />
+                    <input placeholder="Nhập email" className="form__register__email" name="email" type="email" required />
                 </div>
                 <div className="form__group">
                     <input placeholder="Nhập password" className="form__register__password" name="password" type="pasword" required />

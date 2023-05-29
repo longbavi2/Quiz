@@ -20,7 +20,7 @@ function Login() {
             dispatch(AuthenStatus(true));
             navigate("/");
         } else {
-            alert("Mật khẩu Hoặc tài khoản không đúng");
+            alert("Mật khẩu hoặc tài khoản không đúng");
         }
     }
     return (

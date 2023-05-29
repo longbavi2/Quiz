@@ -27,7 +27,7 @@ function Register() {
         if (result.length > 0) {
             alert("Email đã tồn tại")
         } else {
-            const respon = await postUser("users", options);
+            const respon = await postUser("users", options).catch(err=>console.log(err))
             navigate("/login");
             alert("Đã thêm thành công");
         }

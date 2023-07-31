@@ -12,7 +12,7 @@ function Result() {
     const [data, setData] = useState([]);
     const [dataInfo, setDataInfo] = useState({});
     useEffect(() => {
-        var count = 0;
+        let count = 0;
         const dataAnswersById = async () => {
             const dataAnswer = await getAnswersById(id);
             const dataQuestions = await getDataQuestionById(dataAnswer[0].topicId)
@@ -26,17 +26,15 @@ function Result() {
                     id: dataQuestions[i].id
                 })
             }
-            for (var j = 0; j < options.length; j++) {
-                if (options[j].answer === options[j].correctAnswer) {
-                    count++;
-                }
+            for (let j = 0; j < options.length; j++) {
+                count += options[j].answer === options[j].correctAnswer ? 1 : 0;
             }
             const info = {
                 count: count,
                 length: options.length,
 
             };
-            setDataInfo(info)
+            setDataInfo(info);
             setData(options);
         }
         dataAnswersById();

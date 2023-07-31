@@ -27,7 +27,7 @@ function Register() {
         if (result.length > 0) {
             alert("Email đã tồn tại")
         } else {
-            const respon = await postUser("users", options).catch(err=>console.log(err))
+            const respon = await postUser("users", options).catch(err => console.log(err))
             navigate("/login");
             alert("Đã thêm thành công");
         }
@@ -35,9 +35,9 @@ function Register() {
     return (
         <>
             <form className="form__register" action="" onSubmit={handleSubmit}>
-                <h4>
+                <h2>
                     Đăng kí tài khoản
-                </h4>
+                </h2>
                 <div className="form__group">
                     <input placeholder="Nhập họ tên" className="form__register__fullnam" name="fullname" type="text" required />
                 </div>

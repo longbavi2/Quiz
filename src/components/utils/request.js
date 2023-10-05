@@ -1,4 +1,4 @@
-const API_DOMAIN = "https://test-json-nine.vercel.app/";
+const API_DOMAIN = "http://localhost:8081/v1/api/";
 
 export const get = async (path, options) => {
   const response = await fetch(API_DOMAIN + path, options);

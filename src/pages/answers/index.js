@@ -21,12 +21,12 @@ function Answers() {
         const dataAnswers = async () => {
             const dataAnswers = await dataAnswersService(id)
             const dataTopic = await getDataTopic();
-            var options = [];
-            for (var i = 0; i < dataAnswers.length; i++) {
+            const options = [];
+            for (let i = 0; i < dataAnswers.data.length; i++) {
                 options.push({
-                    ...dataAnswers[i],
-                    ...dataTopic.find(item => item.id === dataAnswers[i].topicId),
-                    id: dataAnswers[i].id
+                    ...dataAnswers.data[i],
+                    ...dataTopic.data.find(item => item._id === dataAnswers.data[i].topicId),
+                    id: dataAnswers.data[i]._id
                 })
             }
             check(options)

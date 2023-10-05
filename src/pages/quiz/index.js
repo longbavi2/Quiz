@@ -10,44 +10,47 @@ function Quiz() {
     const param = useParams();
     const [dataQuestion, setDataQuestion] = useState([]);
     useEffect(() => {
+        let options = [];
         const getDataQuestions = async () => {
             const dataQuestionbuyId = await getDataQuestionById(param.id);
-            const dataTopicbuyId = await getDataTopicById(param.id)
-            var options = [];
-            for (var i = 0; i < dataQuestionbuyId.length; i++) {
-                options.push({
-                    ...dataQuestionbuyId[i],
-                    ...dataTopicbuyId[0],
-                    id: dataQuestionbuyId[i].id
-                })
+            const dataTopicById = await getDataTopicById(param.id)
+            if (dataQuestionbuyId.data.length > 0 && dataTopicById.data.length > 0) {
+                let Name = dataTopicById.data.find(item => item._id === dataQuestionbuyId.data[0].topicId)
+                let nameFinal = Name.name
+                for (let i = 0; i < dataQuestionbuyId.data.length; i++) {
+                    options.push({
+                        ...dataQuestionbuyId.data[i],
+                        name: nameFinal,
+                        id: dataQuestionbuyId.data[i]._id
+                    })
+                }
+                setDataQuestion(options)
             }
-            setDataQuestion(options)
         }
         getDataQuestions();
     }, [])
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        var options = [];
-        for (var i = 0; i < e.target.length; i++) {
-            if(e.target[i].checked === true){
+        let options = [];
+        for (let i = 0; i < e.target.length; i++) {
+            if (e.target[i].checked === true) {
                 let questionId = parseInt(e.target[i].name) + 1;
                 let answer = parseInt(e.target[i].value)
                 options.push({
-                    questionId :questionId,
-                    answer : answer
+                    questionId: questionId,
+                    answer: answer
                 })
             }
         }
         var ResultFinal = {
-            userId : parseInt(id),
-            topicId: parseInt(param.id),
-            answers:options
+            userId: id,
+            topicId: param.id,
+            answers: options
         };
         const responPost = await postAnswersService(ResultFinal);
-        if(responPost){
-            navigate(`/result/${responPost.id}`)
+        if (responPost) {
+            navigate(`/result/${responPost.data._id}`)
         }
-
     }
     return (
         <>
@@ -77,7 +80,7 @@ function Quiz() {
                             </div>
                         ))
                     }
-                   <button type="submit" >Nộp bài</button>
+                    <button type="submit" >Nộp bài</button>
                 </form>
             </>) : (<></>)}
         </>

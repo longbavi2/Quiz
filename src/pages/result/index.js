@@ -15,15 +15,17 @@ function Result() {
         let count = 0;
         const dataAnswersById = async () => {
             const dataAnswer = await getAnswersById(id);
-            const dataQuestions = await getDataQuestionById(dataAnswer[0].topicId)
+            const dataQuestions = await getDataQuestionById(dataAnswer.data[0].topicId)
             const dataTopics = await getTopics();
-            var options = [];
-            for (var i = 0; i < dataQuestions.length; i++) {
+            let options = [];
+            for (let i = 0; i < dataQuestions.data.length; i++) {
+                let itemQuestions = dataQuestions.data[i]
+                itemQuestions.correctAnswer = parseInt(itemQuestions.correctAnswer)
                 options.push({
-                    ...dataQuestions[i],
-                    ...dataAnswer[0].answers.find(item => item.questionId === dataQuestions[i].id),
-                    ...dataTopics.find(item => item.id === dataQuestions[0].topicId),
-                    id: dataQuestions[i].id
+                    ...itemQuestions,
+                    ...dataAnswer.data[0].answers[i],
+                    ...dataTopics.data.find(item => item._id === dataQuestions.data[0].topicId),
+                    id: dataQuestions.data[i]._id
                 })
             }
             for (let j = 0; j < options.length; j++) {

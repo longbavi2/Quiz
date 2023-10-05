@@ -4,7 +4,6 @@ import Login from "../pages/Login";
 import Answers from "../pages/answers";
 import Home from "../pages/home";
 import PrivateDefault from "../pages/private";
-import Questions from "../pages/questions";
 import Quiz from "../pages/quiz";
 import Register from "../pages/register";
 import Result from "../pages/result";
@@ -26,10 +25,6 @@ const routes = [
             {
                 path: "/answers",
                 element: <Answers />
-            },
-            {
-                path: "/questions",
-                element: <Questions />
             },
             {
                 path: "/login",

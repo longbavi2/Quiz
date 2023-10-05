@@ -4,9 +4,9 @@ import "./style.scss"
 function Register() {
     const navigate = useNavigate();
     const ranDomString = (length) => {
-        var result = "";
+        let result = "";
         const string = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm";
-        for (var i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
             result += string[Math.floor(Math.random() * 60)];
         }
         return result;
@@ -14,9 +14,9 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const token = ranDomString(20);
-        var fullname = e.target.elements.fullname.value;
-        var email = e.target.elements.email.value;
-        var password = e.target.elements.password.value;
+        let fullname = e.target.elements.fullname.value;
+        let email = e.target.elements.email.value;
+        let password = e.target.elements.password.value;
         const options = {
             fullName: fullname,
             email: email,

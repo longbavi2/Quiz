@@ -12,14 +12,14 @@ function Login() {
     const [eye, setEye] = useState(true);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        var name = e.target.elements[0].value;
-        var passwword = e.target.elements[1].value;
+        const name = e.target.elements[0].value;
+        const passwword = e.target.elements[1].value;
         const respon = await getDataUserLogin(name, passwword);
-        if (respon.length > 0) {
+        if (respon.data.length > 0) {
             const time = 1;
-            setCookie("token", respon[0].token, time);
-            setCookie("id", respon[0].id, time);
-            setCookie("email", respon[0].email, time);
+            setCookie("token", respon.data[0].token, time);
+            setCookie("id", respon.data[0]._id, time);
+            setCookie("email", respon.data[0].email, time);
             dispatch(AuthenStatus(true));
             navigate("/");
         } else {
